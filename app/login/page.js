@@ -1,4 +1,6 @@
 "use client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Login = () => {
@@ -10,6 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
+  const router = useRouter();
   // const handleOnchange = (e) => {
   //   console.log(e.target.value);
   //   const { name, value } = e.target;
@@ -25,18 +28,15 @@ const Login = () => {
     const formData = {
       email,
       password,
-      password_confirmation
+      password_confirmation,
     };
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      console.log(data);
+      const response = await axios.post("http://127.0.0.1:8000/api/login", formData);
+      // const data = await response.json();
+      console.log(response.data);
+      if(response.data){
+        router.push('/')
+      }
     } catch (error) {
       console.log("error", error);
     }

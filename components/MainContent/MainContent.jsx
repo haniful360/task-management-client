@@ -6,6 +6,7 @@ import circle from "../../assets/main-content/circle.svg";
 import trend from "../../assets/main-content/trendup.svg";
 import exportIcon from "../../assets/main-content/export.svg";
 import HiringTable from "./HiringTable";
+import Image from "next/image";
 
 const MainContent = () => {
   const cards = [
@@ -49,7 +50,7 @@ const MainContent = () => {
             </div>
             <div className="">
               <button className="flex items-center justify-center gap-2 bg-[#D9F27E] hover:bg-[#c0d76e] w-[154px] h-[48px] text-white px-4 py-2 rounded-lg shadow">
-                <img src={exportIcon} alt="" />
+                <Image src={exportIcon} alt="" />
                 <span className="text-[#222222] text-[14px] font-medium">
                   Export Report
                 </span>
@@ -62,7 +63,7 @@ const MainContent = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center ">
                     <div>
-                      <img src={card.icon} alt="" />
+                      <Image src={card.icon} alt="" />
                     </div>
                     <div className="ml-4">
                       <h2 className="text-sm font-semibold text-[16px] text-gray-700">
@@ -71,7 +72,7 @@ const MainContent = () => {
                     </div>
                   </div>
                   <div className="cursor-pointer">
-                    <img src={card.dot} alt="" />
+                    <Image src={card.dot} alt="" />
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
@@ -88,7 +89,7 @@ const MainContent = () => {
                       Last month
                     </span>
                     <div className="flex items-center gap-1 mt-1 bg-[#F9FAF5] py-2 px-3 rounded-lg text-sm text-[16px]">
-                      <img src={trend} alt="trend" />
+                      <Image src={trend} alt="trend" />
                       <span className="text-[#222222] text-[16px]">
                         {card.trendValue}
                       </span>

@@ -8,6 +8,7 @@ import flag6 from "../../assets/main-content/flag/india.svg";
 import filters from "../../assets/main-content/flag/Filter.svg";
 import add from "../../assets/main-content/flag/Add.svg";
 import ellipse from "../../assets/main-content/flag/Ellipse 5.svg";
+import Image from "next/image";
 
 const HiringTable = () => {
   const data = [
@@ -150,7 +151,7 @@ const HiringTable = () => {
                   <td className="py-4 px-5">{row.id}</td>
                   <td className="py-4 px-5">{row.type}</td>
                   <td className="py-4 px-5 flex items-center gap-2">
-                    <img src={row.icon} alt="" className="w-5 h-5" />
+                    <Image src={row.icon} alt="" className="w-5 h-5" />
                     {row.country}
                   </td>
                   <td className="py-4 px-5">

@@ -35,7 +35,7 @@ const Login = () => {
       // const data = await response.json();
       console.log(response.data);
       if(response.data){
-        router.push('/')
+        router.push('/dashboard')
       }
     } catch (error) {
       console.log("error", error);

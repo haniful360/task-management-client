@@ -4,6 +4,7 @@ import filters from "../../assets/main-content/flag/Filter.svg";
 import add from "../../assets/main-content/flag/Add.svg";
 import ellipse from "../../assets/main-content/flag/Ellipse 5.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 const HiringTable = () => {
   const [data, setData] = useState([]);
@@ -52,7 +53,7 @@ const HiringTable = () => {
         <div className="flex space-x-4">
           <button className="flex items-center gap-1 bg-[#D9F27E] text-black font-medium px-4 py-2 rounded-lg shadow hover:bg-[#b9d359] text-sm">
             <img src={add} alt="" />
-            <span className="text-[#222222] font-medium">Add New</span>
+            <Link href='addtask'><span className="text-[#222222] font-medium">Add New</span></Link>
           </button>
           <button className="flex items-center gap-1 bg-[#F9FAF5] h-[48px] px-4 py-2 rounded-lg hover:bg-gray-100 text-sm">
             <img src={filters} alt="" />
@@ -91,7 +92,7 @@ const HiringTable = () => {
                 <td className="py-4 px-5">{row.description}</td>
                 <td className="py-4 px-5">{row.due_date}</td>
 
-                <td className="py-4 px-5 flex items-center justify-end">
+                <td className="py-4 px-5 flex items-center">
                   <div
                     className={`flex gap-1.5 px-3 py-2 rounded text-xs font-medium ${
                       row.status === "approved"

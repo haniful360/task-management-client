@@ -1,6 +1,6 @@
 import React from "react";
 // import logo from "@/assets/images/Logo.svg";
-import logo from '@/assets/images/Logo.svg';
+import logo from "@/assets/images/Logo.svg";
 import dashboard from "../../assets/images/Dashboard.svg";
 import team from "../../assets/images/user.svg";
 import wallet from "../../assets/images/Wallet.svg";
@@ -13,6 +13,7 @@ import Rectangle from "../../assets/images/Rectangle.svg";
 import down from "../../assets/images/down.svg";
 import frame from "../../assets/images/frame.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Sidebar = () => {
   return (
@@ -30,9 +31,11 @@ const Sidebar = () => {
           <p className="text-sm text-gray-500 uppercase mb-4 ml-4">Menu</p>
           <ul className="space-y-2">
             {/* Menu Item */}
-            <li className="flex items-center space-x-3 text-[#70747B] hover:text-black cursor-pointer h-14 px-4 rounded-lg hover:bg-gray-100">
-              <Image src={dashboard} alt="Dashboard" />
-              <span className="text-base ">Home</span>
+            <li className="">
+              <Link href="/" className="flex items-center space-x-3 text-[#70747B] hover:text-black cursor-pointer h-14 px-4 rounded-lg hover:bg-gray-100">
+                <Image src={dashboard} alt="Dashboard" />
+                <span className="text-base ">Home</span>
+              </Link>
             </li>
 
             {/* Team */}

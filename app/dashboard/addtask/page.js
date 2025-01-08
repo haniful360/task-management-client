@@ -1,6 +1,8 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function TaskForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ export default function TaskForm({ onSubmit }) {
     status: "pending",
     due_date: "",
   });
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +23,7 @@ export default function TaskForm({ onSubmit }) {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/tasks",
-        formData,
+      const response = await axios.post("http://127.0.0.1:8000/api/tasks",formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -30,7 +31,15 @@ export default function TaskForm({ onSubmit }) {
         }
       );
       if (response.data) {
-        console.log("Task created successfully:", response.data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        router.push('/dashboard')
+        
         // Optionally, clear the form after a successful task creation
         setFormData({
           name: "",

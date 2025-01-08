@@ -81,8 +81,9 @@ const HiringTable = () => {
               </th>
               <th className="py-4 px-5 border-t border-b">Description</th>
               <th className="py-4 px-5 border-t border-b">Due Date</th>
-              <th className="py-4 px-5 flex items-center border-t border-r border-b rounded-r-lg">
-                Status
+              <th className="py-4 px-5 border-t border-b"> Status</th>
+              <th className="py-4 px-5 flex justify-center border-t border-r border-b rounded-r-lg">
+                Action
               </th>
             </tr>
           </thead>
@@ -110,6 +111,24 @@ const HiringTable = () => {
                   >
                     <Image src={ellipse} alt="" />
                     {row.status}
+                  </div>
+                </td>
+                <td className="py-4 px-5">
+                  <div className="flex space-x-2 justify-end">
+                    {/* Show Button */}
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                      Show
+                    </button>
+
+                    {/* Update Button */}
+                    <button className="bg-green-500 hover:bg-green-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                      Update
+                    </button>
+
+                    {/* Delete Button */}
+                    <button className="bg-red-500 hover:bg-red-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>

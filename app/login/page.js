@@ -30,12 +30,14 @@ const Login = () => {
       password,
       password_confirmation,
     };
+
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/login", formData);
-      // const data = await response.json();
-      console.log(response.data);
-      if(response.data){
-        router.push('/dashboard')
+      const response = await axios.post( "http://127.0.0.1:8000/api/login", formData);
+
+      if (response.data) {
+        router.push("/dashboard");
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
       }
     } catch (error) {
       console.log("error", error);

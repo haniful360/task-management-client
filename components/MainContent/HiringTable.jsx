@@ -5,6 +5,7 @@ import add from "../../assets/main-content/flag/Add.svg";
 import ellipse from "../../assets/main-content/flag/Ellipse 5.svg";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const HiringTable = () => {
   const [data, setData] = useState([]);
@@ -14,15 +15,20 @@ const HiringTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/tasks");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No token found. Please log in.");
         }
-        const result = await response.json();
-        setData(result.data);
+
+        const response = await axios.get("http://127.0.0.1:8000/api/tasks", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data.data);
         setLoading(false);
       } catch (error) {
-        setError(error.message);
+        setError(error.response?.data?.message || error.message);
         setLoading(false);
       }
     };
@@ -53,7 +59,9 @@ const HiringTable = () => {
         <div className="flex space-x-4">
           <button className="flex items-center gap-1 bg-[#D9F27E] text-black font-medium px-4 py-2 rounded-lg shadow hover:bg-[#b9d359] text-sm">
             <img src={add} alt="" />
-            <Link href='addtask'><span className="text-[#222222] font-medium">Add New</span></Link>
+            <Link href="dashboard/addtask">
+              <span className="text-[#222222] font-medium">Add New</span>
+            </Link>
           </button>
           <button className="flex items-center gap-1 bg-[#F9FAF5] h-[48px] px-4 py-2 rounded-lg hover:bg-gray-100 text-sm">
             <img src={filters} alt="" />

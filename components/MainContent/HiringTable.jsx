@@ -37,7 +37,11 @@ const HiringTable = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center min-h-screen">
+    <div className="text-center">
+      <div className="animate-spin h-8 w-8 border-4 border-gray-300 border-t-transparent rounded-full mb-4"></div>
+    </div>
+  </div>
   }
 
   if (error) {
@@ -116,9 +120,9 @@ const HiringTable = () => {
                 <td className="py-4 px-5">
                   <div className="flex space-x-2 justify-end">
                     {/* Show Button */}
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                    <Link href={`dashboard/show/${row.id}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
                       Show
-                    </button>
+                    </button></Link>
 
                     {/* Update Button */}
                     <button className="bg-green-500 hover:bg-green-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">

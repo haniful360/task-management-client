@@ -56,7 +56,7 @@ const Register = () => {
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center text-blue-600">
+        <h2 className="text-2xl font-bold text-center text-[#D9F27E]">
           Create an Account
         </h2>
         {responseMessage && (
@@ -119,15 +119,15 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-[#D9F27E] text-white py-2 px-4 hover:bg-[#cbe767] rounded-lg  transition"
           >
             Register
           </button>
         </form>
         <p className="text-sm text-center text-gray-600 mt-4">
-          Already have an account?
-          <a href="/login" className="text-blue-600 hover:underline">
-            Login
+          Already have an account? 
+           <a href="/login" className="text-blue-600 hover:underline">
+             Login
           </a>
         </p>
       </div>

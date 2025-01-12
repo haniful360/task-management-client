@@ -6,14 +6,14 @@ import React, { useEffect, useState } from "react";
 const ShowTask = () => {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const { id } = useParams();
+  const { slug } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/tasks/${id}`,
+          `http://127.0.0.1:8000/api/tasks/${slug}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -28,14 +28,13 @@ const ShowTask = () => {
       }
     };
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin h-8 w-8 border-4 border-gray-300 border-t-transparent rounded-full mb-4"></div>
-          {/* <p className="text-gray-600">Loading...</p> */}
         </div>
       </div>
     );

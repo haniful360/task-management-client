@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Register = () => {
@@ -126,9 +127,9 @@ const Register = () => {
         </form>
         <p className="text-sm text-center text-gray-600 mt-4">
           Already have an account? 
-           <a href="/login" className="text-blue-600 hover:underline">
+           <Link href="/login" className="text-blue-600 hover:underline">
              Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

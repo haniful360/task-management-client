@@ -11,6 +11,7 @@ const HiringTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,6 +94,7 @@ const HiringTable = () => {
           </thead>
           <tbody className="text-sm">
             {data.map((row, index) => (
+            
               <tr
                 key={index}
                 className={`${
@@ -101,7 +103,9 @@ const HiringTable = () => {
               >
                 <td className="py-4 px-5 flex items-center gap-3">
                   <span className="font-medium">{row.name}</span>
+                  
                 </td>
+                
                 <td className="py-4 px-5">{row.description}</td>
                 <td className="py-4 px-5">{row.due_date}</td>
 
@@ -120,7 +124,7 @@ const HiringTable = () => {
                 <td className="py-4 px-5">
                   <div className="flex space-x-2 justify-end">
                     {/* Show Button */}
-                    <Link href={`dashboard/show/${row.id}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                    <Link href={`dashboard/show/${row.slug}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
                       Show
                     </button></Link>
 

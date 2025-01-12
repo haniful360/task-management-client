@@ -38,11 +38,13 @@ const HiringTable = () => {
   }, []);
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">
-    <div className="text-center">
-      <div className="animate-spin h-8 w-8 border-4 border-gray-300 border-t-transparent rounded-full mb-4"></div>
-    </div>
-  </div>
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin h-8 w-8 border-4 border-gray-300 border-t-transparent rounded-full mb-4"></div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
@@ -94,7 +96,6 @@ const HiringTable = () => {
           </thead>
           <tbody className="text-sm">
             {data.map((row, index) => (
-            
               <tr
                 key={index}
                 className={`${
@@ -103,9 +104,8 @@ const HiringTable = () => {
               >
                 <td className="py-4 px-5 flex items-center gap-3">
                   <span className="font-medium">{row.name}</span>
-                  
                 </td>
-                
+
                 <td className="py-4 px-5">{row.description}</td>
                 <td className="py-4 px-5">{row.due_date}</td>
 
@@ -124,14 +124,18 @@ const HiringTable = () => {
                 <td className="py-4 px-5">
                   <div className="flex space-x-2 justify-end">
                     {/* Show Button */}
-                    <Link href={`dashboard/show/${row.slug}`}><button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
-                      Show
-                    </button></Link>
+                    <Link href={`dashboard/show/${row.slug}`}>
+                      <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                        Show
+                      </button>
+                    </Link>
 
                     {/* Update Button */}
-                    <button className="bg-green-500 hover:bg-green-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
-                      Update
-                    </button>
+                    <Link href={`dashboard/update/${row.slug}`}>
+                      <button className="bg-green-500 hover:bg-green-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                        Update
+                      </button>
+                    </Link>
 
                     {/* Delete Button */}
                     <button className="bg-red-500 hover:bg-red-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">

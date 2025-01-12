@@ -1,3 +1,5 @@
+'use client'
+import withAuth from "@/component/hoc/withAuth";
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import React from "react";
@@ -17,4 +19,4 @@ const Dashboardlayout = ({ children }) => {
   );
 };
 
-export default Dashboardlayout;
+export default withAuth(Dashboardlayout);

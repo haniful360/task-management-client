@@ -1,3 +1,5 @@
+'use client'
+import withAuth from '@/component/hoc/withAuth';
 import MainContent from '@/components/MainContent/MainContent';
 import React from 'react';
 
@@ -9,4 +11,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default withAuth(page);

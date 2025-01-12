@@ -1,10 +1,11 @@
 "use client";
+import withAuth from "@/component/hoc/withAuth";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-export default function TaskForm({ onSubmit }) {
+const TaskForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -156,3 +157,4 @@ export default function TaskForm({ onSubmit }) {
     </div>
   );
 }
+export default withAuth(TaskForm);

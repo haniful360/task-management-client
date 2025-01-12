@@ -13,7 +13,6 @@ const UpdateTask = () => {
   });
   const { slug } = useParams();
   const router = useRouter();
-  console.log(slug);
   useEffect(() => {
     const fetchTask = async () => {
       const token = localStorage.getItem("token");
@@ -84,7 +83,7 @@ const UpdateTask = () => {
             type="text"
             id="name"
             name="name"
-            value={formData?.name}
+            value={formData?.name || ""}
             onChange={handleChange}
             className="mt-2 block w-full rounded-lg border border-gray-300 bg-gray-50 py-2 px-4 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter task name"
@@ -103,7 +102,7 @@ const UpdateTask = () => {
           <textarea
             id="description"
             name="description"
-            value={formData?.description}
+            value={formData?.description  || ""}
             onChange={handleChange}
             className="mt-2 block w-full rounded-lg border border-gray-300 bg-gray-50 py-2 px-4 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter task description"
@@ -144,7 +143,7 @@ const UpdateTask = () => {
             type="date"
             id="due_date"
             name="due_date"
-            value={formData?.due_date}
+            value={formData?.due_date  || ""}
             onChange={handleChange}
             className="mt-2 block w-full rounded-lg border border-gray-300 bg-gray-50 py-2 px-4 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />

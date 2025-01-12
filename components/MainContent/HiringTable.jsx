@@ -6,17 +6,17 @@ import ellipse from "../../assets/main-content/flag/Ellipse 5.svg";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const HiringTable = () => {
-  const [data, setData] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(data);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("token");
         if (!token) {
           throw new Error("No token found. Please log in.");
         }
@@ -26,7 +26,7 @@ const HiringTable = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setData(response.data.data);
+        setTasks(response.data.data);
         setLoading(false);
       } catch (error) {
         setError(error.response?.data?.message || error.message);
@@ -36,6 +36,48 @@ const HiringTable = () => {
 
     fetchData();
   }, []);
+
+  const handleTaskDelete = async (taskSlug) => {
+    const token = localStorage.getItem("token");
+
+    // Show confirmation dialog first
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.delete(
+          `http://127.0.0.1:8000/api/tasks/${taskSlug}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+
+        if (response.data) {
+          const updatedTask = tasks?.filter((task) => task.slug !== taskSlug);
+          setTasks(updatedTask);
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your task has been deleted.",
+            icon: "success",
+          });
+        }
+      } catch (error) {
+        console.error("Error deleting task:", error);
+      }
+    }
+  };
 
   if (loading) {
     return (
@@ -58,7 +100,7 @@ const HiringTable = () => {
           <button className="bg-white px-3 py-1.5 rounded-lg text-sm font-semibold text-[#393C43]">
             All hires
             <span className="bg-[#FCCE44] text-[10px] px-1 py-0.5 rounded ml-1">
-              {data.length}
+              {tasks.length}
             </span>
           </button>
           {/* Additional Buttons */}
@@ -95,7 +137,7 @@ const HiringTable = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            {data.map((row, index) => (
+            {tasks.map((row, index) => (
               <tr
                 key={index}
                 className={`${
@@ -138,7 +180,10 @@ const HiringTable = () => {
                     </Link>
 
                     {/* Delete Button */}
-                    <button className="bg-red-500 hover:bg-red-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300">
+                    <button
+                      onClick={() => handleTaskDelete(row.slug)}
+                      className="bg-red-500 hover:bg-red-600 text-white font-medium px-3 py-1.5 rounded-lg text-sm transition duration-300"
+                    >
                       Delete
                     </button>
                   </div>

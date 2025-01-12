@@ -80,6 +80,18 @@ const HiringTable = () => {
     }
   };
 
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+
+    if (!destination) return; // If dropped outside of a valid droppable area
+
+    const reorderedTasks = Array.from(tasks);
+    const [removed] = reorderedTasks.splice(source.index, 1);
+    reorderedTasks.splice(destination.index, 0, removed);
+
+    setTasks(reorderedTasks);
+  };
+  
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">

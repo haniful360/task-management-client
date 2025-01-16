@@ -4,19 +4,43 @@ import moon from "../../assets/header/Moon.svg";
 import sun from "../../assets/header/Sun.svg";
 import userphoto from "../../assets/header/frame.svg";
 import notification from "../../assets/header/Notification.svg";
-import profile from "../../assets/header/profile.svg";
-import Arrow from "../../assets/header/Arrow-down.svg";
+// import profile from "../../assets/header/profile.svg";
+// import Arrow from "../../assets/header/Arrow-down.svg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 const Header = () => {
   const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const user = JSON.parse(storedUser);
     setUser(user);
   }, []);
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.post(
+        "http://127.0.0.1:8000/api/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.removeItem("token");
+      router.push('/login')
+    } catch (error) {
+      console.error("Logout failed:", error);
+      alert("Failed to log out. Please try again.");
+    }
+  };
 
   return (
     <header className="flex items-center justify-between gap-4 bg-white h-[100px] p-4 ">
@@ -59,16 +83,31 @@ const Header = () => {
 
           {/* Profile */}
           <div className="flex items-center space-x-2 cursor-pointer">
-            <div>
-              <p className="text-sm font-medium text-gray-700">{user?.name}</p>
-              <p className="text-xs text-gray-400">New York, USA</p>
-            </div>
-            <Image
+            {user?.name ? (
+              <div className="flex gap-4">
+                <div>
+                  <p className="text-sm font-medium text-gray-700">
+                    {user?.name}
+                  </p>
+                  <p className="text-xs text-gray-400">New York, USA</p>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  id="logoutButton"
+                  className="px-6 py-2 bg-red-500 text-white font-semibold rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+            {/* <Image
               src={profile}
               alt="Profile"
               className="h-10 w-10 object-cover"
             />
-            <Image src={Arrow} alt="Profile" className="" />
+            <Image src={Arrow} alt="Profile" className="" /> */}
           </div>
         </div>
       </div>

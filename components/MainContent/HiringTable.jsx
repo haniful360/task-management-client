@@ -122,7 +122,7 @@ const HiringTable = () => {
           <button className="flex items-center gap-1 bg-[#D9F27E] text-black font-medium px-4 py-2 rounded-lg shadow hover:bg-[#b9d359] text-sm">
             <img src={add} alt="" />
             <Link href="dashboard/addtask">
-              <span className="text-[#222222] font-medium">Add New</span>
+              <span className="text-[#222222] font-medium">Add Task</span>
             </Link>
           </button>
           <button className="flex items-center gap-1 bg-[#F9FAF5] h-[48px] px-4 py-2 rounded-lg hover:bg-gray-100 text-sm">
